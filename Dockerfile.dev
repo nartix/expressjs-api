@@ -1,0 +1,16 @@
+FROM node:18.9-alpine3.15
+# FROM node:17.7.2-bullseye
+# ENV PATH /app/node_modules/.bin:$PATH
+WORKDIR "/app"
+# USER root
+# RUN chown -R root:root /app
+# RUN chown -R node:node /app/node_modules
+# COPY ./package.json ./
+# RUN npm install create-react-app
+COPY . .
+# RUN chown -R root:root "/app"
+# RUN chown -R node:node /app/node_modules
+# CMD ["npm", "start"]
+COPY entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/bin/sh", "entrypoint.sh"]
+# CMD ["/usr/bin/myapp"]
