@@ -1,6 +1,6 @@
 ## About the project
 
-This API was built using ExpressJS and utilizes PostgreSQL as its database. It is deployed on a Kubernetes cluster.
+This API was built using ExpressJS and utilizes PostgreSQL as its database. It is deployed on a self-managed Kubernetes cluster.
 
 Live Demo: <a href='https://expressjs.ferozfaiz.com/'>expressjs.ferozfaiz.com</a>
 
