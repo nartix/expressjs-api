@@ -1,28 +1,9 @@
-version: '3.8'
-
 services:
   expressjs-api:
-    image: node:23.5-alpine3.20
+    image: 155097172472.dkr.ecr.us-east-2.amazonaws.com/portfolio-expressjs:2024.04.25.130939446
     container_name: expressjs-api
-    working_dir: /app
-    command:
-      - /bin/sh
-      - -c
-      - |
-        tail -F /dev/null
-    # user: "1000:1000"
-    volumes:
-      # - /app/node_modules
-      - ./:/app
-    ports:
-      - '5000:5000'
     restart: unless-stopped
-    environment:
-      - NODE_ENV=development
-      # {{ with secret "kv/data/POSTGRESQL" }}
-      - pg_master_database=portfolio
-      - pg_master_user={{ .Data.data.POSTGRESQL_USERNAME }}
-      - pg_master_password={{ .Data.data.POSTGRESQL_PASSWORD }}
-      - pg_master_host={{ .Data.data.POSTGRESQL_MASTER_HOST }}
-      - pg_master_port=5432
-      # {{ end }}
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:5000:5000"
