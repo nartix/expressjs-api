@@ -1,0 +1,21 @@
+{
+  "name": "expressjs-api-cloudflare",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --config wrangler.jsonc",
+    "deploy": "wrangler deploy --config wrangler.jsonc",
+    "deploy:production": "wrangler deploy --config wrangler.jsonc",
+    "deploy:staging": "wrangler deploy --config wrangler.jsonc --env staging",
+    "containers:list": "wrangler containers list",
+    "containers:images": "wrangler containers images list",
+    "types": "wrangler types --config wrangler.jsonc"
+  },
+  "dependencies": {
+    "@cloudflare/containers": "^0.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "wrangler": "^4"
+  }
+}
