@@ -12,6 +12,44 @@ Live Demo: <a href='https://expressjs.ferozfaiz.com/'>expressjs.ferozfaiz.com</a
 - Docker
 - AWS ECR
 
+## Cloudflare Containers Deployment
+
+Cloudflare deployment files live in `cloudfare/`. The existing Docker Compose and ECR deployment files are still available for local and future Docker-based use.
+
+Before deploying Cloudflare staging or production, sync the PostgreSQL environment values from the repo `.env` file into Cloudflare Worker secrets:
+
+```bash
+cd cloudfare
+npm install --no-package-lock
+npm run secrets:sync:staging
+npm run deploy:staging
+```
+
+For production:
+
+```bash
+cd cloudfare
+npm run secrets:sync:production
+npm run deploy:production
+```
+
+To verify the secret sync without writing to Cloudflare:
+
+```bash
+cd cloudfare
+DRY_RUN=true npm run secrets:sync:staging
+```
+
+The sync command uploads these secrets for the selected Cloudflare environment:
+
+- `pg_master_host`
+- `pg_master_port`
+- `pg_master_user`
+- `pg_master_password`
+- `pg_master_database`
+
+See `cloudfare/README.md` for full Cloudflare command details.
+
 ## Screenshots
 
 <br>
