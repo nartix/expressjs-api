@@ -45,7 +45,33 @@ Create these Worker secrets for each Cloudflare environment before deploying:
 - `pg_master_password`
 - `pg_master_database`
 
-Example:
+To sync them from the existing repo `.env` file:
+
+```bash
+cd cloudfare
+npm run secrets:sync:staging
+```
+
+For production:
+
+```bash
+cd cloudfare
+npm run secrets:sync:production
+```
+
+To read a different env file, set `CLOUDFLARE_SECRETS_ENV_FILE`:
+
+```bash
+CLOUDFLARE_SECRETS_ENV_FILE=/path/to/.env.production npm run secrets:sync:production
+```
+
+To preview what would be synced without writing secrets:
+
+```bash
+DRY_RUN=true npm run secrets:sync:staging
+```
+
+You can still set secrets manually if needed:
 
 ```bash
 cd cloudfare
