@@ -9,13 +9,22 @@ This directory contains the Cloudflare-only deployment surface for the ExpressJS
 
 The existing Docker Compose and ECR deployment files are intentionally left untouched. They can still be used for local or future Docker deployment.
 
+## Quick Start
+
+Install the isolated Cloudflare dependencies once:
+
+```bash
+cd cloudfare
+npm install --no-package-lock
+```
+
 ## Staging
 
 The staging environment deploys to `workers.dev`, not to `expressjs.ferozfaiz.com`, so it is safe to test before production.
 
 ```bash
 cd cloudfare
-npm install --no-package-lock
+npm run secrets:sync:staging
 npm run deploy:staging
 ```
 
@@ -31,13 +40,15 @@ Production disables `workers.dev` and serves the API from the custom domain `exp
 
 ```bash
 cd cloudfare
-npm install --no-package-lock
+npm run secrets:sync:production
 npm run deploy:production
 ```
 
 ## Worker Secrets
 
-Create these Worker secrets for each Cloudflare environment before deploying:
+The Express container needs the same PostgreSQL values used by the existing Docker deployment. The sync script reads those values from the repo `.env` file and uploads them to the selected Cloudflare Worker environment.
+
+Synced secret names:
 
 - `pg_master_host`
 - `pg_master_port`
@@ -45,14 +56,14 @@ Create these Worker secrets for each Cloudflare environment before deploying:
 - `pg_master_password`
 - `pg_master_database`
 
-To sync them from the existing repo `.env` file:
+Sync staging secrets:
 
 ```bash
 cd cloudfare
 npm run secrets:sync:staging
 ```
 
-For production:
+Sync production secrets:
 
 ```bash
 cd cloudfare
@@ -75,11 +86,11 @@ You can still set secrets manually if needed:
 
 ```bash
 cd cloudfare
-wrangler secret put pg_master_host --config wrangler.jsonc
-wrangler secret put pg_master_port --config wrangler.jsonc
-wrangler secret put pg_master_user --config wrangler.jsonc
-wrangler secret put pg_master_password --config wrangler.jsonc
-wrangler secret put pg_master_database --config wrangler.jsonc
+npm exec -- wrangler secret put pg_master_host --config wrangler.jsonc
+npm exec -- wrangler secret put pg_master_port --config wrangler.jsonc
+npm exec -- wrangler secret put pg_master_user --config wrangler.jsonc
+npm exec -- wrangler secret put pg_master_password --config wrangler.jsonc
+npm exec -- wrangler secret put pg_master_database --config wrangler.jsonc
 ```
 
 For staging, add `--env staging` to each `wrangler secret put` command.
