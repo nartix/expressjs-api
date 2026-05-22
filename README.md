@@ -12,6 +12,10 @@ Live Demo: <a href='https://expressjs.ferozfaiz.com/'>expressjs.ferozfaiz.com</a
 - Docker
 - AWS ECR
 
+## Environment
+
+Copy `.env.example` to `.env` and fill in the PostgreSQL values before running the Docker deployment or syncing Cloudflare Worker secrets.
+
 ## Cloudflare Containers Deployment
 
 Cloudflare deployment files live in `cloudfare/`. The existing Docker Compose and ECR deployment files are still available for local and future Docker-based use.

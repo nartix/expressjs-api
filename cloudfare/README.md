@@ -9,6 +9,8 @@ This directory contains the Cloudflare-only deployment surface for the ExpressJS
 
 The existing Docker Compose and ECR deployment files are intentionally left untouched. They can still be used for local or future Docker deployment.
 
+Copy `../.env.example` to `../.env` and fill in the PostgreSQL values before running the secret sync commands.
+
 ## Quick Start
 
 Install the isolated Cloudflare dependencies once:
